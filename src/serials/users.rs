@@ -2,7 +2,8 @@ use clap::{
     Args,
     Parser,
 };
-#[derive(Debug, Args)]
+use serde::{Serialize, Deserialize};
+#[derive(Debug, Args, Serialize, Deserialize)]
 pub struct CreateUser {
     pub first_name: String,
     pub last_name: String,
@@ -11,7 +12,7 @@ pub struct CreateUser {
     pub password: String,
 }
 
-#[derive(Debug, Args)]
+#[derive(Debug, Args, Serialize, Deserialize)]
 pub struct UpdateUser {
     pub id: i32,
     pub first_name: String,
@@ -21,6 +22,7 @@ pub struct UpdateUser {
     pub password: String,
     pub role: String,
     pub date_of_birth: Option<String>,
+    pub created_at: String,
     pub active: bool,
 }
 
@@ -29,3 +31,8 @@ pub struct DeleteUser {
     pub id: i32,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ErrUser {
+    pub status_code: i16,
+    pub message: String,
+}
